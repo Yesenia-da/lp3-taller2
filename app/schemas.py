@@ -54,16 +54,14 @@ class UsuarioWithFavoritos(UsuarioRead):
 
 # TODO: Schema para crear una película (request)
 class PeliculaCreate(BaseModel):
-    """
-    Schema para crear una nueva película.
-    """
-    # titulo: str = Field(min_length=1, max_length=200)
-    # director: str = Field(min_length=1, max_length=150)
-    # genero: str = Field(min_length=1, max_length=100)
-    # duracion: int = Field(gt=0, description="Duración en minutos")
-    # año: int = Field(ge=1888, le=2100, description="Año de estreno")
-    # clasificacion: str = Field(max_length=10)
-    # sinopsis: Optional[str] = Field(None, max_length=1000)
+    
+    titulo: str = Field(min_length=1, max_length=200)
+    director: str = Field(min_length=1, max_length=150)
+    genero: str = Field(min_length=1, max_length=100)
+    duracion: int = Field(gt=0, description="Duración en minutos")
+    año: int = Field(ge=1888, le=2100, description="Año de estreno")
+    clasificacion: str = Field(max_length=10)
+    sinopsis: Optional[str] = Field(None, max_length=1000)
     
     # model_config = ConfigDict(
     #     json_schema_extra={
