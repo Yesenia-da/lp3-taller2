@@ -91,23 +91,19 @@ class PeliculaUpdate(BaseModel):
 
 
 
-# TODO: Schema para leer una película (response)
 class PeliculaRead(BaseModel):
-    """
-    Schema para retornar información de una película.
-    """
-    # id: int
-    # titulo: str
-    # director: str
-    # genero: str
-    # duracion: int
-    # año: int
-    # clasificacion: str
-    # sinopsis: Optional[str]
-    # fecha_creacion: datetime
+
+    id: int
+    titulo: str
+    director: str
+    genero: str
+    duracion: int
+    año: int
+    clasificacion: str
+    sinopsis: Optional[str]
+    fecha_creacion: datetime
     
-    # model_config = ConfigDict(from_attributes=True)
-    pass
+    model_config = ConfigDict(from_attributes=True)
 
 
 # =============================================================================
