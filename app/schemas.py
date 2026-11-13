@@ -63,19 +63,19 @@ class PeliculaCreate(BaseModel):
     clasificacion: str = Field(max_length=10)
     sinopsis: Optional[str] = Field(None, max_length=1000)
     
-    # model_config = ConfigDict(
-    #     json_schema_extra={
-    #         "example": {
-    #             "titulo": "Inception",
-    #             "director": "Christopher Nolan",
-    #             "genero": "Ciencia Ficción, Acción",
-    #             "duracion": 148,
-    #             "año": 2010,
-    #             "clasificacion": "PG-13",
-    #             "sinopsis": "Un ladrón que roba secretos mediante tecnología de sueños..."
-    #         }
-    #     }
-    # )
+    model_config = ConfigDict(
+        json_schema_extra={
+            "example": {
+                "titulo": "Inception",
+                "director": "Christopher Nolan",
+                "genero": "Ciencia Ficción, Acción",
+                "duracion": 148,
+                "año": 2010,
+                "clasificacion": "PG-13",
+                "sinopsis": "Un ladrón que roba secretos mediante tecnología de sueños..."
+            }
+        }
+    )
     pass
 
 
