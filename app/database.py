@@ -5,10 +5,9 @@ Utiliza SQLModel para ORM y gestión de conexiones.
 
 from sqlmodel import SQLModel, create_engine, Session
 from typing import Generator
+from sqlalchemy import text
 
 from app.config import settings
-
-
 # TODO: Crear el engine de la base de datos
 # El engine es la conexión principal a la base de datos
 # connect_args es específico para SQLite, remover para otras bases de datos
@@ -65,8 +64,7 @@ def check_database_connection() -> bool:
     """
     try:
         with Session(engine) as session:
-            # TODO: Ejecutar una consulta simple para verificar la conexión
-            # session.exec(text("SELECT 1"))
+            session.exec(text("SELECT 1"))
             return True
     except Exception as e:
         print(f"Error al conectar con la base de datos: {e}")
