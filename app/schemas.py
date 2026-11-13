@@ -135,14 +135,9 @@ class FavoritoWithDetails(FavoritoRead):
 # ESQUEMAS DE RESPUESTA GENÉRICOS
 # =============================================================================
 
-# TODO: Schema para respuestas con mensajes
 class MessageResponse(BaseModel):
-    """
-    Schema genérico para respuestas con mensajes.
-    """
-    # message: str
-    # detail: Optional[str] = None
-    pass
+    message: str
+    detail: Optional[str] = None
 
 
 # TODO: Schema para respuestas paginadas
