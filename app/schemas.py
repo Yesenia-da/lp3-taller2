@@ -116,18 +116,14 @@ class FavoritoCreate(BaseModel):
 
 
 
-# TODO: Schema para leer un favorito (response)
 class FavoritoRead(BaseModel):
-    """
-    Schema para retornar información de un favorito.
-    """
-    # id: int
-    # id_usuario: int
-    # id_pelicula: int
-    # fecha_marcado: datetime
+
+    id: int
+    id_usuario: int
+    id_pelicula: int
+    fecha_marcado: datetime
     
-    # model_config = ConfigDict(from_attributes=True)
-    pass
+    model_config = ConfigDict(from_attributes=True)
 
 
 # TODO: Schema para favorito con información completa (response)
