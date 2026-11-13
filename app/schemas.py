@@ -126,14 +126,9 @@ class FavoritoRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
-# TODO: Schema para favorito con información completa (response)
 class FavoritoWithDetails(FavoritoRead):
-    """
-    Schema para retornar un favorito con información del usuario y película.
-    """
-    # usuario: UsuarioRead
-    # pelicula: PeliculaRead
-    pass
+    usuario: UsuarioRead
+    pelicula: PeliculaRead
 
 
 # =============================================================================
