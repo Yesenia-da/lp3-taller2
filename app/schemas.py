@@ -34,19 +34,14 @@ class UsuarioUpdate(BaseModel):
     correo: Optional[EmailStr] = None
 
 
-# TODO: Schema para leer un usuario (response)
 class UsuarioRead(BaseModel):
-    """
-    Schema para retornar información de un usuario.
-    Incluye todos los campos del modelo.
-    """
-    # id: int
-    # nombre: str
-    # correo: str
-    # fecha_registro: datetime
+  
+    id: int
+    nombre: str
+    correo: str
+    fecha_registro: datetime
     
-    # model_config = ConfigDict(from_attributes=True)
-    pass
+    model_config = ConfigDict(from_attributes=True)
 
 
 # TODO: Schema para usuario con sus favoritos (response)
