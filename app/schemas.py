@@ -140,17 +140,12 @@ class MessageResponse(BaseModel):
     detail: Optional[str] = None
 
 
-# TODO: Schema para respuestas paginadas
 class PaginatedResponse(BaseModel):
-    """
-    Schema genérico para respuestas paginadas.
-    """
-    # items: List[BaseModel]
-    # total: int
-    # page: int = 1
-    # size: int = 50
-    # pages: int
-    pass
+    items: List[BaseModel]
+    total: int
+    page: int = 1
+    size: int = 50
+    pages: int
 
 
 # TODO: Opcional - Schema para búsqueda de películas
