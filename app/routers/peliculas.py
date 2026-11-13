@@ -70,7 +70,6 @@ def obtener_pelicula(
     
     - **pelicula_id**: ID de la película
     """
-    # TODO: Buscar la película por ID
     pelicula = session.get(Pelicula, pelicula_id)
     if not pelicula:
     raise HTTPException(
@@ -94,8 +93,13 @@ def actualizar_pelicula(
     - Los campos son opcionales, solo se actualizan los proporcionados
     """
     # TODO: Buscar la película
-    db_pelicula = 
+    db_pelicula = session.get(Pelicula, pelicula_id)
 
+    if not db_pelicula:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Película con id {pelicula_id} no encontrada"
+        )
 
     # TODO: Actualizar solo los campos proporcionados
     pelicula_data = 
