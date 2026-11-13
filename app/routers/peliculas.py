@@ -39,24 +39,12 @@ def listar_peliculas(
 
 # TODO: Endpoint para crear una nueva película
 @router.post("/", response_model=PeliculaRead, status_code=status.HTTP_201_CREATED)
-def crear_pelicula(
-    pelicula: PeliculaCreate,
-    session: Session = Depends(get_session)
-):
-    """
-    Crea una nueva película en la plataforma.
-    
-    - **titulo**: Título de la película
-    - **director**: Director de la película
-    - **genero**: Género cinematográfico
-    - **duracion**: Duración en minutos
-    - **año**: Año de estreno
-    - **clasificacion**: Clasificación por edad (G, PG, PG-13, R, etc.)
-    - **sinopsis**: Breve descripción de la trama
-    """
-    # TODO: Verificar que no exista una película con el mismo título y año
-    statement = 
-    
+ 
+     statement = select(Pelicula).where(
+        Pelicula.titulo == pelicula.titulo,
+        Pelicula.año == pelicula.año
+    )
+
     existing_pelicula = 
     if existing_pelicula:
         raise HTTPException(
@@ -64,8 +52,10 @@ def crear_pelicula(
             detail=f"Ya existe una película con el título '{pelicula.titulo}' del año {pelicula.año}"
         )
     
-    # TODO: Crear la nueva película
     db_pelicula = 
+    session.add(db_pelicula)
+    session.commit()
+    session.refresh(db_pelicula)
     
     return db_pelicula
 
