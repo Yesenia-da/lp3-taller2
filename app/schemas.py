@@ -14,25 +14,18 @@ from datetime import datetime
 # ESQUEMAS DE USUARIO
 # =============================================================================
 
-# TODO: Schema para crear un usuario (request)
 class UsuarioCreate(BaseModel):
-    """
-    Schema para crear un nuevo usuario.
-    No incluye id ni fecha_registro (se generan automáticamente).
-    """
-    # nombre: str = Field(min_length=1, max_length=100, description="Nombre del usuario")
-    # correo: EmailStr = Field(description="Correo electrónico único")
-    
-    # TODO: Opcional - Agregar ejemplo para la documentación
-    # model_config = ConfigDict(
-    #     json_schema_extra={
-    #         "example": {
-    #             "nombre": "Juan Pérez",
-    #             "correo": "juan.perez@email.com"
-    #         }
-    #     }
-    # )
-    pass
+    nombre: str = Field(min_length=1, max_length=100, description="Nombre del usuario")
+    correo: EmailStr = Field(description="Correo electrónico único")
+
+    model_config = ConfigDict(
+        json_schema_extra={
+            "example": {
+                "nombre": "Juan Pérez",
+                "correo": "juan.perez@email.com"
+            }
+        }
+    )
 
 
 # TODO: Schema para actualizar un usuario (request)
