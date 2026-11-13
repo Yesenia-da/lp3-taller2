@@ -44,14 +44,9 @@ class UsuarioRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
-# TODO: Schema para usuario con sus favoritos (response)
 class UsuarioWithFavoritos(UsuarioRead):
-    """
-    Schema para retornar un usuario con sus películas favoritas.
-    """
-    # favoritos: List["FavoritoRead"] = []
-    pass
-
+ 
+    favoritos: List["FavoritoRead"] = Field(default_factory=list)
 
 # =============================================================================
 # ESQUEMAS DE PELÍCULA
