@@ -110,14 +110,10 @@ class PeliculaRead(BaseModel):
 # ESQUEMAS DE FAVORITO
 # =============================================================================
 
-# TODO: Schema para crear un favorito (request)
 class FavoritoCreate(BaseModel):
-    """
-    Schema para marcar una película como favorita.
-    """
-    # id_usuario: int = Field(gt=0)
-    # id_pelicula: int = Field(gt=0)
-    pass
+    id_usuario: int = Field(gt=0)
+    id_pelicula: int = Field(gt=0)
+
 
 
 # TODO: Schema para leer un favorito (response)
