@@ -28,15 +28,10 @@ class UsuarioCreate(BaseModel):
     )
 
 
-# TODO: Schema para actualizar un usuario (request)
 class UsuarioUpdate(BaseModel):
-    """
-    Schema para actualizar un usuario existente.
-    Todos los campos son opcionales.
-    """
-    # nombre: Optional[str] = Field(None, min_length=1, max_length=100)
-    # correo: Optional[EmailStr] = None
-    pass
+   
+    nombre: Optional[str] = Field(None, min_length=1, max_length=100)
+    correo: Optional[EmailStr] = None
 
 
 # TODO: Schema para leer un usuario (response)
