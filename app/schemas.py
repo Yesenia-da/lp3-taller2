@@ -52,7 +52,6 @@ class UsuarioWithFavoritos(UsuarioRead):
 # ESQUEMAS DE PELÍCULA
 # =============================================================================
 
-# TODO: Schema para crear una película (request)
 class PeliculaCreate(BaseModel):
     
     titulo: str = Field(min_length=1, max_length=200)
