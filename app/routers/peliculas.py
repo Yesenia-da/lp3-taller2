@@ -60,7 +60,6 @@ def listar_peliculas(
     return db_pelicula
 
 
-# TODO: Endpoint para obtener una película por ID
 @router.get("/{pelicula_id}", response_model=PeliculaRead)
 def obtener_pelicula(
     pelicula_id: int,
@@ -74,10 +73,10 @@ def obtener_pelicula(
     # TODO: Buscar la película por ID
     pelicula = session.get(Pelicula, pelicula_id)
     if not pelicula:
-        raise HTTPException(
-            # TODO: Código y Detalle del Error
-
-        )
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"Película con id {pelicula_id} no encontrada"
+    )
     return pelicula
 
 
