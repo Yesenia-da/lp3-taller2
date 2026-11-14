@@ -266,17 +266,14 @@ def eliminar_todos_favoritos_usuario(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Usuario con id {usuario_id} no encontrado"
         )
-    # TODO: Eliminar todos los favoritos del usuario
-    # statement = select(Favorito).where(Favorito.id_usuario == usuario_id)
-    # favoritos = session.exec(statement).all()
-    
-    # for favorito in favoritos:
-    #     session.delete(favorito)
-    
-    # session.commit()
-    # return None
-    pass
+    statement = select(Favorito).where(Favorito.id_usuario == usuario_id)
+    favoritos = session.exec(statement).all()
 
+    for favorito in favoritos:
+        session.delete(favorito)
+
+    session.commit()
+    return None
 
 # TODO: Opcional - Endpoint para obtener recomendaciones basadas en favoritos
 @router.get("/recomendaciones/{usuario_id}", response_model=List)
