@@ -28,9 +28,10 @@ def formatear_duracion(minutos):
     Returns:
         str: Duración formateada como hh:mm
     """
-    # TODO: pendiente de implementar
-    pass 
-
+    horas = minutos // 60
+    minutos_restantes = minutos % 60
+    return f"{horas:02d}:{minutos_restantes:02d}"
+    
 def generar_slug(texto):
     """
     Genera un slug a partir de un texto.
