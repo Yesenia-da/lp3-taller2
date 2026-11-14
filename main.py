@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+import logging
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
@@ -38,10 +39,22 @@ app = FastAPI(
         "name": "MIT",
     },
 )
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    logger.info("Solicitud: %s %s", request.method, request.url.path)
+
+    response = await call_next(request)
+
+    logger.info(
+        "Respuesta: %s %s - %s",
+        request.method,
+        request.url.path,
+        response.status_code,
+    )
+
+    return response
 
 
-# TODO: Configurar CORS para permitir solicitudes desde diferentes orígenes
-# Esto es importante para desarrollo con frontend separado
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # TODO: En producción, especificar orígenes permitidos
@@ -62,7 +75,7 @@ async def root():
     """
     return {
         "mensaje": "Bienvenido a la API de Películas",
-        "version": settings.version,
+        "version": "1.0.0",
         "documentacion": "/docs",
         "documentacion_alternativa": "/redoc",
         "endpoints": {
