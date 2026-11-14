@@ -290,14 +290,12 @@ def obtener_recomendaciones(
     - **usuario_id**: ID del usuario
     - **limit**: Número máximo de recomendaciones
     """
-    # TODO: Verificar que el usuario existe
-    # usuario = session.get(Usuario, usuario_id)
-    # if not usuario:
-    #     raise HTTPException(
-    #         status_code=status.HTTP_404_NOT_FOUND,
-    #         detail=f"Usuario con id {usuario_id} no encontrado"
-    #     )
-    
+    usuario = session.get(Usuario, usuario_id)
+    if not usuario:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Usuario con id {usuario_id} no encontrado"
+        )
     # TODO: Obtener géneros y directores de películas favoritas del usuario
     # statement = (
     #     select(Pelicula.genero, Pelicula.director)
