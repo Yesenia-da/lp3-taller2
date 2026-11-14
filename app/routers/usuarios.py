@@ -292,11 +292,19 @@ def obtener_estadisticas_usuario(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Usuario con id {usuario_id} no encontrado"
         )    
-        
+
     statement = select(func.count(Favorito.id)).where(
         Favorito.id_usuario == usuario_id
     )
     total_favoritos = session.exec(statement).one()   
-     # TODO: Obtener géneros más favoritos
-    # TODO: Calcular tiempo total de películas favoritas
+
+    statement = (
+        select(Pelicula.genero, func.count(Favorito.id).label("total"))
+        .join(Favorito, Favorito.id_pelicula == Pelicula.id)
+        .where(Favorito.id_usuario == usuario_id)
+        .group_by(Pelicula.genero)
+        .order_by(func.count(Favorito.id).desc())
+    )
+    generos_favoritos = session.exec(statement).all()
+        # TODO: Calcular tiempo total de películas favoritas
     pass
