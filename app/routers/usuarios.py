@@ -256,11 +256,12 @@ def eliminar_favorito(
     - **usuario_id**: ID del usuario
     - **pelicula_id**: ID de la película
     """
-    # TODO: Buscar el favorito
-    statement = 
+    statement = select(Favorito).where(
+        Favorito.id_usuario == usuario_id,
+        Favorito.id_pelicula == pelicula_id
+    )
 
-    favorito = 
-    
+    favorito = session.exec(statement).first()
     if not favorito:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
