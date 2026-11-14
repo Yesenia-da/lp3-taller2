@@ -109,8 +109,18 @@ def actualizar_usuario(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Usuario con id {usuario_id} no encontrado"
         )
-    # TODO: Si se actualiza el correo, verificar que no exista
-    
+    if usuario_update.correo:
+        statement = select(Usuario).where(
+            Usuario.correo == usuario_update.correo,
+            Usuario.id != usuario_id
+        )
+        existing_user = session.exec(statement).first()
+
+        if existing_user:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Ya existe otro usuario registrado con ese correo"
+            )    
     # TODO: Actualizar solo los campos proporcionados
     usuario_data = 
     
