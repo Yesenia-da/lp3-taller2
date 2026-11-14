@@ -235,19 +235,17 @@ def estadisticas_favoritos(
         .limit(1)
     )
     top_pelicula = session.exec(statement_pelicula).first()
-    # return {
-    #     "total_favoritos": total_favoritos,
-    #     "usuario_top": {
-    #         "nombre": top_usuario[0].nombre if top_usuario else None,
-    #         "cantidad_favoritos": top_usuario[1] if top_usuario else 0
-    #     },
-    #     "pelicula_top": {
-    #         "titulo": top_pelicula[0].titulo if top_pelicula else None,
-    #         "cantidad_favoritos": top_pelicula[1] if top_pelicula else 0
-    #     }
-    # }
-    pass
-
+    return {
+        "total_favoritos": total_favoritos,
+        "usuario_top": {
+            "nombre": top_usuario[0].nombre if top_usuario else None,
+            "cantidad_favoritos": top_usuario[1] if top_usuario else 0
+        },
+        "pelicula_top": {
+            "titulo": top_pelicula[0].titulo if top_pelicula else None,
+            "cantidad_favoritos": top_pelicula[1] if top_pelicula else 0
+        }
+    }
 
 # TODO: Opcional - Endpoint para eliminar todos los favoritos de un usuario
 @router.delete("/usuario/{usuario_id}/todos", status_code=status.HTTP_204_NO_CONTENT)
