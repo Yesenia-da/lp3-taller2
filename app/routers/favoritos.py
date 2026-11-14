@@ -67,19 +67,18 @@ def crear_favorito(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Película con id {favorito.id_pelicula} no encontrada"
         )   
+
+    statement = select(Favorito).where(
+        Favorito.id_usuario == favorito.id_usuario,
+        Favorito.id_pelicula == favorito.id_pelicula
+    )
+    existing_favorito = session.exec(statement).first()
+    if existing_favorito:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Este favorito ya existe"
+        )
         
-    # TODO: Verificar si ya existe el favorito
-    # statement = select(Favorito).where(
-    #     Favorito.id_usuario == favorito.id_usuario,
-    #     Favorito.id_pelicula == favorito.id_pelicula
-    # )
-    # existing_favorito = session.exec(statement).first()
-    # if existing_favorito:
-    #     raise HTTPException(
-    #         status_code=status.HTTP_400_BAD_REQUEST,
-    #         detail="Este favorito ya existe"
-    #     )
-    
     # TODO: Crear el nuevo favorito
     # db_favorito = Favorito.model_validate(favorito)
     # session.add(db_favorito)
