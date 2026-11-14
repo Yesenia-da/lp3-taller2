@@ -78,15 +78,12 @@ def crear_favorito(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Este favorito ya existe"
         )
-        
-    # TODO: Crear el nuevo favorito
-    # db_favorito = Favorito.model_validate(favorito)
-    # session.add(db_favorito)
-    # session.commit()
-    # session.refresh(db_favorito)
-    # return db_favorito
-    pass
 
+    db_favorito = Favorito.model_validate(favorito)
+    session.add(db_favorito)
+    session.commit()
+    session.refresh(db_favorito)
+    return db_favorito
 
 # TODO: Endpoint para obtener un favorito por ID
 @router.get("/{favorito_id}", response_model=FavoritoWithDetails)
