@@ -268,8 +268,8 @@ def eliminar_favorito(
             detail="El favorito no existe"
         )
     
-    # TODO: Eliminar el favorito
-    
+    session.delete(favorito)
+    session.commit() 
     return None
 
 
