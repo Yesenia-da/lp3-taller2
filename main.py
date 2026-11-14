@@ -29,14 +29,14 @@ app = FastAPI(
     description="API RESTful para gestionar usuarios, películas y favoritos",
     version="1.0.0",
     lifespan=lifespan,
-    # TODO: Agregar información de contacto y licencia
-    # contact={
-    #     "name": "Tu Nombre",
-    #     "email": "tu.email@example.com",
-    # },
-    # license_info={
-    #     "name": "MIT",
-    # },
+
+    contact={
+        "name": "Tu Nombre",
+        "email": "tu.email@example.com",
+    },
+    license_info={
+        "name": "MIT",
+    },
 )
 
 
