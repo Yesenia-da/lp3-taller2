@@ -6,6 +6,7 @@ Endpoints para gestionar usuarios en la plataforma.
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session, select
 from typing import List
+from sqlalchemy import func
 
 from app.database import get_session
 from app.models import Usuario, Favorito, Pelicula
@@ -290,7 +291,12 @@ def obtener_estadisticas_usuario(
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Usuario con id {usuario_id} no encontrado"
-        )    # TODO: Calcular número total de favoritos
-    # TODO: Obtener géneros más favoritos
+        )    
+        
+    statement = select(func.count(Favorito.id)).where(
+        Favorito.id_usuario == usuario_id
+    )
+    total_favoritos = session.exec(statement).one()   
+     # TODO: Obtener géneros más favoritos
     # TODO: Calcular tiempo total de películas favoritas
     pass
