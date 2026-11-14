@@ -115,8 +115,10 @@ async def health_check():
 
 if __name__ == "__main__":
     import uvicorn
-    
-    uvicorn.run(
-        # TODO: Configurar el servidor uvicorn con los parámetros apropiados
-    )
 
+    uvicorn.run(
+        "main:app",
+        host="127.0.0.1",
+        port=8000,
+        reload=True,
+    )
