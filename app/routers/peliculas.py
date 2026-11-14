@@ -196,14 +196,19 @@ def peliculas_populares(
     
     - **limit**: Número de películas a retornar (máximo 50)
     """
-    # TODO: Consultar películas ordenadas por número de favoritos
     from sqlalchemy import func
-    statement = 
 
-    results = 
-    peliculas = [ result[0] for result in results ]
+    statement = (
+        select(Pelicula, func.count(Favorito.id).label("total_favoritos"))
+        .join(Favorito, Favorito.pelicula_id == Pelicula.id, isouter=True)
+        .group_by(Pelicula.id)
+        .order_by(func.count(Favorito.id).desc())
+        .limit(limit)
+    )
+
+    results = session.exec(statement).all()
+    peliculas = [result[0] for result in results]
     return peliculas
-
 
 # TODO: Opcional - Endpoint para obtener películas por clasificación
 @router.get("/clasificacion/{clasificacion}", response_model=List[PeliculaRead])
