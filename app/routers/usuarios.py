@@ -78,12 +78,16 @@ def obtener_usuario(
     
     - **usuario_id**: ID del usuario
     """
-    # TODO: Buscar el usuario por ID
-    usuario = 
-    
+    usuario = session.get(Usuario, usuario_id)
+
+    if not usuario:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Usuario con id {usuario_id} no encontrado"
+        )
+
     return usuario
-
-
+    
 # TODO: Endpoint para actualizar un usuario
 @router.put("/{usuario_id}", response_model=UsuarioRead)
 def actualizar_usuario(
