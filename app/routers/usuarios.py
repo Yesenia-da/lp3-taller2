@@ -17,7 +17,6 @@ from app.schemas import (
     PeliculaRead
 )
 
-# TODO: Crear el router con prefijo y tags
 router = APIRouter(
     prefix="/api/usuarios",
     tags=["Usuarios"]
@@ -37,11 +36,10 @@ def listar_usuarios(
     - **skip**: Número de registros a omitir (para paginación)
     - **limit**: Número máximo de registros a retornar
     """
-    # TODO: Consultar todos los usuarios con paginación
+    statement = select(Usuario).offset(skip).limit(limit)
+    usuarios = session.exec(statement).all()
 
     return usuarios
-
-
 # TODO: Endpoint para crear un nuevo usuario
 @router.post("/", response_model=UsuarioRead, status_code=status.HTTP_201_CREATED)
 def crear_usuario(
