@@ -6,6 +6,7 @@ Endpoints para gestionar las relaciones de favoritos entre usuarios y películas
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session, select
 from typing import List
+from sqlalchemy import func
 
 from app.database import get_session
 from app.models import Favorito, Usuario, Pelicula
@@ -215,10 +216,9 @@ def estadisticas_favoritos(
     - Película más favorita
     - Género más popular en favoritos
     """
-    # TODO: Calcular total de favoritos
-    # from sqlalchemy import func
-    # total_favoritos = session.exec(select(func.count(Favorito.id))).one()
-    
+    total_favoritos = session.exec(
+        select(func.count(Favorito.id))
+    ).one()  
     # TODO: Usuario con más favoritos
     # statement_usuario = (
     #     select(Usuario, func.count(Favorito.id).label("count"))
