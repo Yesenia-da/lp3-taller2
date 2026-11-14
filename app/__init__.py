@@ -7,7 +7,7 @@ from .database import get_session, engine
 from .models import Usuario, Pelicula, Favorito
 from .config import settings
 __version__ = "1.0.0"
-__author__ = "Tu Nombre"  # TODO: Reemplazar con tu nombre
+__author__ = "Yesenia Micanquer"
 
 # TODO: Opcional - Definir __all__ para controlar qué se exporta
 # __all__ = [
