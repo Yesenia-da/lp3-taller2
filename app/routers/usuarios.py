@@ -170,9 +170,13 @@ def listar_favoritos_usuario(
     
     - **usuario_id**: ID del usuario
     """
-    # TODO: Verificar que el usuario existe
-    usuario = 
-    
+    usuario = session.get(Usuario, usuario_id)
+
+    if not usuario:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Usuario con id {usuario_id} no encontrado"
+        )
     # TODO: Obtener las películas favoritas del usuario
     statement = 
     
