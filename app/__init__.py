@@ -9,7 +9,13 @@ from .config import settings
 __version__ = "1.0.0"
 __author__ = "Yesenia Micanquer"
 
-# TODO: Opcional - Definir __all__ para controlar qué se exporta
-# __all__ = [
-# ]
-
+__all__ = [
+    "get_session",
+    "engine",
+    "Usuario",
+    "Pelicula",
+    "Favorito",
+    "settings",
+    "__version__",
+    "__author__",
+]
