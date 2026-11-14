@@ -7,7 +7,8 @@ from .usuarios import router as usuarios_router
 from .peliculas import router as peliculas_router
 from .favoritos import router as favoritos_router
 
-# TODO: Opcional - Definir __all__ para controlar las exportaciones
-# __all__ = [
-# ]
-
+__all__ = [
+    "usuarios_router",
+    "peliculas_router",
+    "favoritos_router",
+]
