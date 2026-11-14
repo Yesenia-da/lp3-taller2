@@ -181,10 +181,8 @@ def buscar_peliculas(
     if año_max:
         statement = statement.where(Pelicula.año <= año_max)
     
-    # TODO: Ejecutar la consulta y retornar resultados
-    # peliculas = session.exec(statement).all()
-    # return peliculas
-    pass
+    peliculas = session.exec(statement).all()
+    return peliculas
 
 
 # TODO: Opcional - Endpoint para obtener películas más populares
