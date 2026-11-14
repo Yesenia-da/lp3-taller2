@@ -87,7 +87,7 @@ def obtener_usuario(
         )
 
     return usuario
-    
+
 # TODO: Endpoint para actualizar un usuario
 @router.put("/{usuario_id}", response_model=UsuarioRead)
 def actualizar_usuario(
@@ -102,9 +102,13 @@ def actualizar_usuario(
     - **nombre**: Nuevo nombre (opcional)
     - **correo**: Nuevo correo (opcional)
     """
-    # TODO: Buscar el usuario
-    db_usuario = 
-    
+    db_usuario = session.get(Usuario, usuario_id)
+
+    if not db_usuario:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Usuario con id {usuario_id} no encontrado"
+        )
     # TODO: Si se actualiza el correo, verificar que no exista
     
     # TODO: Actualizar solo los campos proporcionados
