@@ -162,7 +162,7 @@ def buscar_peliculas(
     - **año_max**: Busca películas hasta este año
     """
     # TODO: Construir la consulta base
-    # statement = select(Pelicula)
+    statement = select(Pelicula)
     
     # TODO: Agregar filtros según los parámetros proporcionados
     # if titulo:
