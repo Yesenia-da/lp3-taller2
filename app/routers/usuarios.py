@@ -230,9 +230,13 @@ def marcar_favorito(
             detail="La película ya está marcada como favorita"
         )
     
-    # TODO: Crear el favorito
-    favorito = 
-    
+    favorito = Favorito(
+        id_usuario=usuario_id,
+        id_pelicula=pelicula_id
+    )
+    session.add(favorito)
+    session.commit()
+    session.refresh(favorito)
     return {"message": "Película marcada como favorita exitosamente"}
 
 
