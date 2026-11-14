@@ -121,11 +121,16 @@ def actualizar_usuario(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Ya existe otro usuario registrado con ese correo"
             )    
-    # TODO: Actualizar solo los campos proporcionados
-    usuario_data = 
-    
-    return db_usuario
+    usuario_data = usuario_update.model_dump(exclude_unset=True)
 
+    for key, value in usuario_data.items():
+        setattr(db_usuario, key, value)
+
+    session.add(db_usuario)
+    session.commit()
+    session.refresh(db_usuario)
+
+    return db_usuario
 
 # TODO: Endpoint para eliminar un usuario
 @router.delete("/{usuario_id}", status_code=status.HTTP_204_NO_CONTENT)
