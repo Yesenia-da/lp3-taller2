@@ -284,8 +284,13 @@ def obtener_estadisticas_usuario(
     
     - **usuario_id**: ID del usuario
     """
-    # TODO: Verificar que el usuario existe
-    # TODO: Calcular número total de favoritos
+    usuario = session.get(Usuario, usuario_id)
+
+    if not usuario:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Usuario con id {usuario_id} no encontrado"
+        )    # TODO: Calcular número total de favoritos
     # TODO: Obtener géneros más favoritos
     # TODO: Calcular tiempo total de películas favoritas
     pass
