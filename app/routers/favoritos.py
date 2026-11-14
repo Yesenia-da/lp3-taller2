@@ -309,10 +309,10 @@ def obtener_recomendaciones(
     generos = [info[0] for info in favoritos_info]
     directores = [info[1] for info in favoritos_info]
     
-    # # Obtener IDs de películas ya favoritas
-    # statement_ids = select(Favorito.id_pelicula).where(Favorito.id_usuario == usuario_id)
-    # ids_favoritos = session.exec(statement_ids).all()
-    
+    statement_ids = select(Favorito.id_pelicula).where(
+        Favorito.id_usuario == usuario_id
+    )
+    ids_favoritos = session.exec(statement_ids).all()   
     # # Buscar películas recomendadas
     # statement_recomendaciones = (
     #     select(Pelicula)
