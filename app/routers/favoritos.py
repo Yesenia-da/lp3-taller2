@@ -227,16 +227,14 @@ def estadisticas_favoritos(
         .limit(1)
     )
     top_usuario = session.exec(statement_usuario).first()
-    # TODO: Película más favorita
-    # statement_pelicula = (
-    #     select(Pelicula, func.count(Favorito.id).label("count"))
-    #     .join(Favorito)
-    #     .group_by(Pelicula.id)
-    #     .order_by(func.count(Favorito.id).desc())
-    #     .limit(1)
-    # )
-    # top_pelicula = session.exec(statement_pelicula).first()
-    
+    statement_pelicula = (
+        select(Pelicula, func.count(Favorito.id).label("count"))
+        .join(Favorito)
+        .group_by(Pelicula.id)
+        .order_by(func.count(Favorito.id).desc())
+        .limit(1)
+    )
+    top_pelicula = session.exec(statement_pelicula).first()
     # return {
     #     "total_favoritos": total_favoritos,
     #     "usuario_top": {
