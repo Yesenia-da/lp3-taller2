@@ -60,11 +60,12 @@ def crear_usuario(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Ya existe un usuario registrado con ese correo"
         )
-    # TODO: Crear el nuevo usuario
     db_usuario = Usuario.model_validate(usuario)
-    
-    return db_usuario
+    session.add(db_usuario)
+    session.commit()
+    session.refresh(db_usuario)
 
+    return db_usuario
 
 # TODO: Endpoint para obtener un usuario por ID
 @router.get("/{usuario_id}", response_model=UsuarioRead)
