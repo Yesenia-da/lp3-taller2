@@ -222,7 +222,6 @@ def peliculas_por_clasificacion(
     
     - **clasificacion**: G, PG, PG-13, R, NC-17
     """
-    # TODO: Validar clasificación
     clasificaciones_validas = ["G", "PG", "PG-13", "R", "NC-17"]
     if clasificacion.upper() not in clasificaciones_validas:
         raise HTTPException(
@@ -230,11 +229,10 @@ def peliculas_por_clasificacion(
             detail=f"Clasificación no válida. Debe ser una de estas: {', '.join(clasificaciones_validas)}"
         )
     
-    # TODO: Buscar películas por clasificación
-    # statement = select(Pelicula).where(
-    #     Pelicula.clasificacion == clasificacion.upper()
-    # ).limit(limit)
-    # peliculas = session.exec(statement).all()
+    statement = select(Pelicula).where(
+        Pelicula.clasificacion == clasificacion.upper()
+    ).limit(limit)
+    peliculas = session.exec(statement).all()
     return peliculas
 
 
