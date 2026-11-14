@@ -4,7 +4,7 @@ Endpoints para gestionar las relaciones de favoritos entre usuarios y películas
 """
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlmodel import Session, select
+from sqlmodel import Session, select, or_, col
 from typing import List
 from sqlalchemy import func
 
@@ -313,19 +313,18 @@ def obtener_recomendaciones(
         Favorito.id_usuario == usuario_id
     )
     ids_favoritos = session.exec(statement_ids).all()   
-    # # Buscar películas recomendadas
-    # statement_recomendaciones = (
-    #     select(Pelicula)
-    #     .where(
-    #         or_(
-    #             col(Pelicula.genero).in_(generos),
-    #             col(Pelicula.director).in_(directores)
-    #         ),
-    #         Pelicula.id.notin_(ids_favoritos)
-    #     )
-    #     .limit(limit)
-    # )
-    # recomendaciones = session.exec(statement_recomendaciones).all()
-    # return recomendaciones
-    pass
+    
+    statement_recomendaciones = (
+        select(Pelicula)
+        .where(
+            or_(
+                col(Pelicula.genero).in_(generos),
+                col(Pelicula.director).in_(directores)
+            ),
+            Pelicula.id.notin_(ids_favoritos)
+        )
+        .limit(limit)
+    )
+    recomendaciones = session.exec(statement_recomendaciones).all()
+    return recomendaciones
 
