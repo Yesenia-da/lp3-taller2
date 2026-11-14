@@ -296,14 +296,13 @@ def obtener_recomendaciones(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Usuario con id {usuario_id} no encontrado"
         )
-    # TODO: Obtener géneros y directores de películas favoritas del usuario
-    # statement = (
-    #     select(Pelicula.genero, Pelicula.director)
-    #     .join(Favorito)
-    #     .where(Favorito.id_usuario == usuario_id)
-    # )
-    # favoritos_info = session.exec(statement).all()
-    
+    statement = (
+        select(Pelicula.genero, Pelicula.director)
+        .join(Favorito)
+        .where(Favorito.id_usuario == usuario_id)
+    )
+    favoritos_info = session.exec(statement).all()
+
     # if not favoritos_info:
     #     return []
     
