@@ -52,10 +52,14 @@ def crear_usuario(
     - **nombre**: Nombre del usuario
     - **correo**: Correo electrónico único
     """
-    # TODO: Verificar que el correo no exista
-    statement = 
-    existing_user = 
-    
+    statement = select(Usuario).where(Usuario.correo == usuario.correo)
+    existing_user = session.exec(statement).first()
+
+    if existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Ya existe un usuario registrado con ese correo"
+        )
     # TODO: Crear el nuevo usuario
     db_usuario = Usuario.model_validate(usuario)
     
