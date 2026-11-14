@@ -247,9 +247,9 @@ def peliculas_recientes(
     
     - **limit**: Número de películas a retornar
     """
-    # TODO: Consultar películas ordenadas por fecha de creación
-    # statement = select(Pelicula).order_by(Pelicula.fecha_creacion.desc()).limit(limit)
-    # peliculas = session.exec(statement).all()
-    # return peliculas
-    pass
+    statement = select(Pelicula).order_by(
+        Pelicula.fecha_creacion.desc()
+    ).limit(limit)
 
+    peliculas = session.exec(statement).all()
+    return peliculas
