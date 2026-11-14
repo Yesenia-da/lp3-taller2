@@ -31,7 +31,7 @@ def formatear_duracion(minutos):
     horas = minutos // 60
     minutos_restantes = minutos % 60
     return f"{horas:02d}:{minutos_restantes:02d}"
-    
+
 def generar_slug(texto):
     """
     Genera un slug a partir de un texto.
@@ -43,16 +43,15 @@ def generar_slug(texto):
     Returns:
         str: Slug generado
     """
-    # TODO: Convertir a minúsculas
-    slug = texto
-    
-    # TODO: Reemplazar espacios con guiones
-    
-    # TODO: Eliminar caracteres no alfanuméricos (excepto guiones)
-    
-    # TODO: Reemplazar múltiples guiones con uno solo
-    
-    # TODO: Eliminar guiones al inicio y final
+    slug = texto.lower()
+
+    slug = re.sub(r"\s+", "-", slug)
+
+    slug = re.sub(r"[^a-z0-9-]", "", slug)
+
+    slug = re.sub(r"-+", "-", slug)
+
+    slug = slug.strip("-")
     
     return slug
 
