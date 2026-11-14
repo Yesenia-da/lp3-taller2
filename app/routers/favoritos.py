@@ -306,9 +306,8 @@ def obtener_recomendaciones(
     if not favoritos_info:
     return []
     
-    # TODO: Buscar películas similares que el usuario NO haya marcado como favoritas
-    # generos = [info[0] for info in favoritos_info]
-    # directores = [info[1] for info in favoritos_info]
+    generos = [info[0] for info in favoritos_info]
+    directores = [info[1] for info in favoritos_info]
     
     # # Obtener IDs de películas ya favoritas
     # statement_ids = select(Favorito.id_pelicula).where(Favorito.id_usuario == usuario_id)
