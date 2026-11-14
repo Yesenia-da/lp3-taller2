@@ -303,8 +303,8 @@ def obtener_recomendaciones(
     )
     favoritos_info = session.exec(statement).all()
 
-    # if not favoritos_info:
-    #     return []
+    if not favoritos_info:
+    return []
     
     # TODO: Buscar películas similares que el usuario NO haya marcado como favoritas
     # generos = [info[0] for info in favoritos_info]
