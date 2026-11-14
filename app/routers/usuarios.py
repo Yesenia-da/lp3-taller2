@@ -306,5 +306,10 @@ def obtener_estadisticas_usuario(
         .order_by(func.count(Favorito.id).desc())
     )
     generos_favoritos = session.exec(statement).all()
-        # TODO: Calcular tiempo total de películas favoritas
-    pass
+    # TODO: Calcular tiempo total de películas favoritas
+    statement = (
+        select(func.sum(Pelicula.duracion))
+        .join(Favorito, Favorito.id_pelicula == Pelicula.id)
+        .where(Favorito.id_usuario == usuario_id)
+    )
+    tiempo_total = session.exec(statement).one() or 0 
