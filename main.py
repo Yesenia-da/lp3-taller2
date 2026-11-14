@@ -4,8 +4,8 @@ from contextlib import asynccontextmanager
 
 from app.database import create_db_and_tables
 from app.routers import usuarios, peliculas, favoritos
+from app.config import settings
 
-# TODO: Importar la configuración desde app.config
 
 
 @asynccontextmanager
