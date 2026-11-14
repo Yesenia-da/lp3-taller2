@@ -61,7 +61,15 @@ async def root():
     Retorna información básica y enlaces a la documentación.
     """
     return {
-        # TODO: Agregar información 
+        "mensaje": "Bienvenido a la API de Películas",
+        "version": settings.version,
+        "documentacion": "/docs",
+        "documentacion_alternativa": "/redoc",
+        "endpoints": {
+            "usuarios": "/api/usuarios",
+            "peliculas": "/api/peliculas",
+            "favoritos": "/api/favoritos"
+        }
     }
 
 
