@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
-from app.database import create_db_and_tables
+from app.database import create_db_and_tables, check_database_connection
 from app.routers import usuarios, peliculas, favoritos
 from app.config import settings
 
@@ -82,10 +82,8 @@ async def health_check():
     """
     return {
         "status": "healthy",
-        # TODO: Agregar verificación de conexión a base de datos
-        # TODO: Agregar información sobre el sistema (uptime, memoria, etc.)
+        "database": "connected" if check_database_connection() else "disconnected"
     }
-
 
 # TODO: Opcional - Agregar middleware para logging de requests
 
