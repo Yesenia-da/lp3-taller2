@@ -177,11 +177,14 @@ def listar_favoritos_usuario(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Usuario con id {usuario_id} no encontrado"
         )
-    # TODO: Obtener las películas favoritas del usuario
-    statement = 
-    
-    return peliculas
+    statement = (
+        select(Pelicula)
+        .join(Favorito, Favorito.id_pelicula == Pelicula.id)
+        .where(Favorito.id_usuario == usuario_id)
+    )
+    peliculas = session.exec(statement).all()
 
+    return peliculas
 
 # TODO: Endpoint para marcar una película como favorita
 @router.post(
