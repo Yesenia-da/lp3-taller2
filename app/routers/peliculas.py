@@ -226,8 +226,8 @@ def peliculas_por_clasificacion(
     clasificaciones_validas = ["G", "PG", "PG-13", "R", "NC-17"]
     if clasificacion.upper() not in clasificaciones_validas:
         raise HTTPException(
-            # TODO: código y detalle del error
-
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Clasificación no válida. Debe ser una de estas: {', '.join(clasificaciones_validas)}"
         )
     
     # TODO: Buscar películas por clasificación
