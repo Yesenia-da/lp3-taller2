@@ -61,14 +61,13 @@ def crear_favorito(
             detail=f"Usuario con id {favorito.id_usuario} no encontrado"
         )
 
-    # TODO: Verificar que la película existe
-    # pelicula = session.get(Pelicula, favorito.id_pelicula)
-    # if not pelicula:
-    #     raise HTTPException(
-    #         status_code=status.HTTP_404_NOT_FOUND,
-    #         detail=f"Película con id {favorito.id_pelicula} no encontrada"
-    #     )
-    
+    pelicula = session.get(Pelicula, favorito.id_pelicula)
+    if not pelicula:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Película con id {favorito.id_pelicula} no encontrada"
+        )   
+        
     # TODO: Verificar si ya existe el favorito
     # statement = select(Favorito).where(
     #     Favorito.id_usuario == favorito.id_usuario,
