@@ -313,7 +313,7 @@ def obtener_estadisticas_usuario(
         .where(Favorito.id_usuario == usuario_id)
     )
     tiempo_total = session.exec(statement).one() or 0 
-        return {
+    return {
         "usuario_id": usuario_id,
         "nombre": usuario.nombre,
         "total_favoritos": total_favoritos,
