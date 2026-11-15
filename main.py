@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse
 import logging
+logger = logging.getLogger(__name__)
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
@@ -107,10 +108,6 @@ async def health_check():
         "database": "connected" if check_database_connection() else "disconnected"
     }
 
-# TODO: Opcional - Agregar middleware para logging de requests
-
-
-# TODO: Opcional - Agregar manejadores de errores personalizados
 
 
 if __name__ == "__main__":
