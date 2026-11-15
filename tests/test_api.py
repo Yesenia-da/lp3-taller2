@@ -127,17 +127,17 @@ class TestUsuarios:
         response = client.post("/api/usuarios/", json=usuario_data)
         assert response.status_code == 400
         assert "correo" in response.json()["mensaje"].lower()
-        
+
     # TODO: Test para obtener usuario por ID
     def test_obtener_usuario(self, client: TestClient, usuario_test: Usuario):
         """Test para GET /api/usuarios/{id}"""
-        # response = client.get(f"/api/usuarios/{usuario_test.id}")
-        # assert response.status_code == 200
-        # data = response.json()
-        # assert data["id"] == usuario_test.id
-        # assert data["nombre"] == usuario_test.nombre
-        pass
-    
+        response = client.get(f"/api/usuarios/{usuario_test.id}")
+        assert response.status_code == 200
+
+        data = response.json()
+        assert data["id"] == usuario_test.id
+        assert data["nombre"] == usuario_test.nombre
+        
     # TODO: Test para obtener usuario inexistente
     def test_obtener_usuario_no_existe(self, client: TestClient):
         """Test para verificar error 404 con usuario inexistente"""
