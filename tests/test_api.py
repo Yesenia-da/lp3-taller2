@@ -101,22 +101,22 @@ class TestUsuarios:
         response = client.get("/api/usuarios/")
         assert response.status_code == 200
         assert isinstance(response.json(), list)
-        
+
     # TODO: Test para crear usuario
     def test_crear_usuario(self, client: TestClient):
         """Test para POST /api/usuarios"""
-        # usuario_data = {
-        #     "nombre": "Nuevo Usuario",
-        #     "correo": "nuevo@example.com"
-        # }
-        # response = client.post("/api/usuarios/", json=usuario_data)
-        # assert response.status_code == 201
-        # data = response.json()
-        # assert data["nombre"] == usuario_data["nombre"]
-        # assert data["correo"] == usuario_data["correo"]
-        # assert "id" in data
-        pass
-    
+        usuario_data = {
+            "nombre": "Nuevo Usuario",
+            "correo": "nuevo@example.com"
+        }
+        response = client.post("/api/usuarios/", json=usuario_data)
+        assert response.status_code == 201
+
+        data = response.json()
+        assert data["nombre"] == usuario_data["nombre"]
+        assert data["correo"] == usuario_data["correo"]
+        assert "id" in data
+        
     # TODO: Test para crear usuario con correo duplicado
     def test_crear_usuario_correo_duplicado(self, client: TestClient, usuario_test: Usuario):
         """Test para verificar que no se permiten correos duplicados"""
