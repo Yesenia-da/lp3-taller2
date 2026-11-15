@@ -137,14 +137,13 @@ class TestUsuarios:
         data = response.json()
         assert data["id"] == usuario_test.id
         assert data["nombre"] == usuario_test.nombre
-        
+
     # TODO: Test para obtener usuario inexistente
     def test_obtener_usuario_no_existe(self, client: TestClient):
         """Test para verificar error 404 con usuario inexistente"""
-        # response = client.get("/api/usuarios/9999")
-        # assert response.status_code == 404
-        pass
-    
+        response = client.get("/api/usuarios/9999")
+        assert response.status_code == 404
+           
     # TODO: Test para actualizar usuario
     def test_actualizar_usuario(self, client: TestClient, usuario_test: Usuario):
         """Test para PUT /api/usuarios/{id}"""
