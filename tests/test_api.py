@@ -59,16 +59,14 @@ def usuario_test_fixture(session: Session):
     """
     Crea un usuario de prueba en la base de datos.
     """
-    # usuario = Usuario(
-    #     nombre="Usuario Test",
-    #     correo="test@example.com"
-    # )
-    # session.add(usuario)
-    # session.commit()
-    # session.refresh(usuario)
-    # return usuario
-    pass
-
+    usuario = Usuario(
+        nombre="Usuario Test",
+        correo="test@example.com"
+    )
+    session.add(usuario)
+    session.commit()
+    session.refresh(usuario)
+    return usuario
 
 # TODO: Fixture para crear películas de prueba
 @pytest.fixture(name="pelicula_test")
