@@ -159,14 +159,11 @@ class TestUsuarios:
     # TODO: Test para eliminar usuario
     def test_eliminar_usuario(self, client: TestClient, usuario_test: Usuario):
         """Test para DELETE /api/usuarios/{id}"""
-        # response = client.delete(f"/api/usuarios/{usuario_test.id}")
-        # assert response.status_code == 204
-        # 
-        # # Verificar que el usuario ya no existe
-        # response = client.get(f"/api/usuarios/{usuario_test.id}")
-        # assert response.status_code == 404
-        pass
+        response = client.delete(f"/api/usuarios/{usuario_test.id}")
+        assert response.status_code == 204
 
+        response = client.get(f"/api/usuarios/{usuario_test.id}")
+        assert response.status_code == 404
 
 # =============================================================================
 # TESTS DE PELÍCULAS
