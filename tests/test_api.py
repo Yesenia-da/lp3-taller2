@@ -223,10 +223,8 @@ class TestPeliculas:
     # TODO: Test para eliminar película
     def test_eliminar_pelicula(self, client: TestClient, pelicula_test: Pelicula):
         """Test para DELETE /api/peliculas/{id}"""
-        # response = client.delete(f"/api/peliculas/{pelicula_test.id}")
-        # assert response.status_code == 204
-        pass
-    
+        response = client.delete(f"/api/peliculas/{pelicula_test.id}")
+        assert response.status_code == 204 
     # TODO: Test para buscar películas
     def test_buscar_peliculas(self, client: TestClient, pelicula_test: Pelicula):
         """Test para GET /api/peliculas/buscar"""
