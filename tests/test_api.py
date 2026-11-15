@@ -197,17 +197,17 @@ class TestPeliculas:
         data = response.json()
         assert data["titulo"] == pelicula_data["titulo"]
         assert "id" in data
-    # TODO: Test para obtener película por ID
+
     def test_obtener_pelicula(self, client: TestClient, pelicula_test: Pelicula):
         """Test para GET /api/peliculas/{id}"""
-        # response = client.get(f"/api/peliculas/{pelicula_test.id}")
-        # assert response.status_code == 200
-        # data = response.json()
-        # assert data["id"] == pelicula_test.id
-        # assert data["titulo"] == pelicula_test.titulo
-        pass
-    
-    # TODO: Test para actualizar película
+        response = client.get(f"/api/peliculas/{pelicula_test.id}")
+        assert response.status_code == 200
+
+        data = response.json()
+        assert data["id"] == pelicula_test.id
+        assert data["titulo"] == pelicula_test.titulo
+
+
     def test_actualizar_pelicula(self, client: TestClient, pelicula_test: Pelicula):
         """Test para PUT /api/peliculas/{id}"""
         # update_data = {"titulo": "Título Actualizado"}
