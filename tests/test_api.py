@@ -286,26 +286,25 @@ class TestFavoritos:
         assert data["id_usuario"] == usuario_test.id
         assert data["id_pelicula"] == pelicula_test.id
 
-    # TODO: Test para crear favorito duplicado
     def test_crear_favorito_duplicado(
-        self, 
-        client: TestClient, 
-        usuario_test: Usuario, 
+        self,
+        client: TestClient,
+        usuario_test: Usuario,
         pelicula_test: Pelicula
     ):
-        """Test para verificar que no se permiten favoritos duplicados"""
-        # favorito_data = {
-        #     "id_usuario": usuario_test.id,
-        #     "id_pelicula": pelicula_test.id
-        # }
-        # # Crear el primer favorito
-        # client.post("/api/favoritos/", json=favorito_data)
-        # 
-        # # Intentar crear el mismo favorito nuevamente
-        # response = client.post("/api/favoritos/", json=favorito_data)
-        # assert response.status_code == 400
-        pass
-    
+        """Test para evitar favoritos duplicados"""
+        favorito_data = {
+            "id_usuario": usuario_test.id,
+            "id_pelicula": pelicula_test.id
+        }
+
+        response1 = client.post("/api/favoritos/", json=favorito_data)
+        assert response1.status_code == 201
+
+        response2 = client.post("/api/favoritos/", json=favorito_data)
+        assert response2.status_code == 400
+        assert response2.json()["mensaje"] == "Este favorito ya existe"
+        
     # TODO: Test para eliminar favorito
     def test_eliminar_favorito(
         self, 
