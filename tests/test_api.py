@@ -98,11 +98,10 @@ class TestUsuarios:
     # TODO: Test para listar usuarios
     def test_listar_usuarios(self, client: TestClient):
         """Test para GET /api/usuarios"""
-        # response = client.get("/api/usuarios/")
-        # assert response.status_code == 200
-        # assert isinstance(response.json(), list)
-        pass
-    
+        response = client.get("/api/usuarios/")
+        assert response.status_code == 200
+        assert isinstance(response.json(), list)
+        
     # TODO: Test para crear usuario
     def test_crear_usuario(self, client: TestClient):
         """Test para POST /api/usuarios"""
