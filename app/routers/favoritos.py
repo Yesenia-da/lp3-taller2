@@ -304,7 +304,7 @@ def obtener_recomendaciones(
     favoritos_info = session.exec(statement).all()
 
     if not favoritos_info:
-    return []
+        return []
     
     generos = [info[0] for info in favoritos_info]
     directores = [info[1] for info in favoritos_info]
