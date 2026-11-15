@@ -7,7 +7,7 @@ SQLModel combina SQLAlchemy con Pydantic para validación automática.
 from sqlmodel import SQLModel, Field, Relationship
 from pydantic import field_validator
 from typing import Optional, List
-from datetime import datetime
+from datetime import datetime, timezone
 from sqlalchemy import UniqueConstraint
 
 # TODO: Modelo Usuario
@@ -19,7 +19,7 @@ class Usuario(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     nombre: str = Field(max_length=100, index=True)
     correo: str = Field(unique=True, max_length=150, index=True)
-    fecha_registro: datetime = Field(default_factory=datetime.now)
+    fecha_registro: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     favoritos: List["Favorito"] = Relationship(back_populates="usuario")
 
@@ -52,8 +52,7 @@ class Pelicula(SQLModel, table=True):
     año: int = Field(ge=1888, le=2100)
     clasificacion: str = Field(max_length=10)
     sinopsis: Optional[str] = Field(default=None, max_length=1000)
-    fecha_creacion: datetime = Field(default_factory=datetime.now)
-
+    fecha_creacion: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     favoritos: List["Favorito"] = Relationship(back_populates="pelicula")
     
 
@@ -71,8 +70,7 @@ class Favorito(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     id_usuario: int = Field(foreign_key="usuario.id")
     id_pelicula: int = Field(foreign_key="pelicula.id")
-    fecha_marcado: datetime = Field(default_factory=datetime.now)
-
+    fecha_marcado: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     usuario: Optional[Usuario] = Relationship(back_populates="favoritos")
     pelicula: Optional[Pelicula] = Relationship(back_populates="favoritos")
 
