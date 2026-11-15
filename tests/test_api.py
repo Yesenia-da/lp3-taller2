@@ -442,21 +442,24 @@ class TestValidacion:
 
         assert response.status_code == 422
     
-    # TODO: Test para validar año de película
     def test_año_pelicula_invalido(self, client: TestClient):
         """Test para verificar validación de año"""
-        # pelicula_data = {
-        #     "titulo": "Película Test",
-        #     "director": "Director Test",
-        #     "genero": "Drama",
-        #     "duracion": 120,
-        #     "año": 1800,  # Año inválido (cine comenzó en 1888)
-        #     "clasificacion": "PG-13"
-        # }
-        # response = client.post("/api/peliculas/", json=pelicula_data)
-        # assert response.status_code == 422
-        pass
-    
+        pelicula_data = {
+            "titulo": "Película Test",
+            "director": "Director Test",
+            "genero": "Drama",
+            "duracion": 120,
+            "año": 1800,
+            "clasificacion": "PG-13"
+        }
+
+        response = client.post(
+            "/api/peliculas/",
+            json=pelicula_data
+        )
+
+        assert response.status_code == 422
+
     # TODO: Test para validar campos requeridos
     def test_campos_requeridos(self, client: TestClient):
         """Test para verificar que los campos requeridos son obligatorios"""
