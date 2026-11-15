@@ -175,11 +175,10 @@ class TestPeliculas:
     # TODO: Test para listar películas
     def test_listar_peliculas(self, client: TestClient):
         """Test para GET /api/peliculas"""
-        # response = client.get("/api/peliculas/")
-        # assert response.status_code == 200
-        # assert isinstance(response.json(), list)
-        pass
-    
+        response = client.get("/api/peliculas/")
+        assert response.status_code == 200
+        assert isinstance(response.json(), list)
+         
     # TODO: Test para crear película
     def test_crear_pelicula(self, client: TestClient):
         """Test para POST /api/peliculas"""
