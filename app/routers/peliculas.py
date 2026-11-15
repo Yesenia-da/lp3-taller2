@@ -39,26 +39,28 @@ def listar_peliculas(
 
 # TODO: Endpoint para crear una nueva película
 @router.post("/", response_model=PeliculaRead, status_code=status.HTTP_201_CREATED)
- 
-     statement = select(Pelicula).where(
+def crear_pelicula(
+    pelicula: PeliculaCreate,
+    session: Session = Depends(get_session)
+):
+    statement = select(Pelicula).where(
         Pelicula.titulo == pelicula.titulo,
         Pelicula.año == pelicula.año
     )
+    existing_pelicula = session.exec(statement).first()
 
-    existing_pelicula = 
     if existing_pelicula:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=f"Ya existe una película con el título '{pelicula.titulo}' del año {pelicula.año}"
         )
-    
-    db_pelicula = 
+
+    db_pelicula = Pelicula.model_validate(pelicula)
     session.add(db_pelicula)
     session.commit()
     session.refresh(db_pelicula)
-    
-    return db_pelicula
 
+    return db_pelicula
 
 @router.get("/{pelicula_id}", response_model=PeliculaRead)
 def obtener_pelicula(
@@ -72,10 +74,10 @@ def obtener_pelicula(
     """
     pelicula = session.get(Pelicula, pelicula_id)
     if not pelicula:
-    raise HTTPException(
-        status_code=status.HTTP_404_NOT_FOUND,
-        detail=f"Película con id {pelicula_id} no encontrada"
-    )
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Película con id {pelicula_id} no encontrada"
+       )
     return pelicula
 
 
@@ -100,7 +102,7 @@ def actualizar_pelicula(
             detail=f"Película con id {pelicula_id} no encontrada"
         )
 
-       # TODO: Actualizar solo los campos proporcionados
+    # TODO: Actualizar solo los campos proporcionados
     pelicula_data = pelicula_update.model_dump(exclude_unset=True)
 
     for key, value in pelicula_data.items():
