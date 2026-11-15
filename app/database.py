@@ -3,7 +3,7 @@ Configuración de la base de datos y gestión de sesiones.
 Utiliza SQLModel para ORM y gestión de conexiones.
 """
 
-from sqlmodel import SQLModel, create_engine, Session
+from sqlmodel import SQLModel, create_engine, Session, select
 from typing import Generator
 from sqlalchemy import text
 
@@ -97,13 +97,62 @@ def init_sample_data():
     Inicializa la base de datos con datos de prueba.
     Útil para desarrollo y testing.
     """
-    # TODO: Crear usuarios, películas y favoritos de ejemplo
-    # with Session(engine) as session:
-    #     # Crear usuarios de ejemplo
-    #     if not session.exec(select(Usuario)).first():
-    #         usuarios = [...]
-    #         for usuario in usuarios:
-    #             session.add(usuario)
-    #         session.commit()
-    pass
+    from app.models import Usuario, Pelicula, Favorito
 
+    with Session(engine) as session:
+        # Evitar duplicar datos si la base de datos ya tiene información
+        if (
+            session.exec(select(Usuario)).first()
+            or session.exec(select(Pelicula)).first()
+            or session.exec(select(Favorito)).first()
+        ):
+            print("La base de datos ya contiene datos de prueba")
+            return
+
+        usuarios = [
+            Usuario(nombre="Ana", correo="ana@example.com"),
+            Usuario(nombre="Carlos", correo="carlos@example.com"),
+            Usuario(nombre="Laura", correo="laura@example.com"),
+        ]
+
+        peliculas = [
+            Pelicula(
+                titulo="Interestelar",
+                director="Christopher Nolan",
+                genero="Ciencia ficción",
+                duracion=169,
+                año=2014,
+                clasificacion="PG-13",
+            ),
+            Pelicula(
+                titulo="Titanic",
+                director="James Cameron",
+                genero="Romance",
+                duracion=195,
+                año=1997,
+                clasificacion="PG-13",
+            ),
+            Pelicula(
+                titulo="Coco",
+                director="Lee Unkrich",
+                genero="Animación",
+                duracion=105,
+                año=2017,
+                clasificacion="PG",
+            ),
+        ]
+
+        session.add_all(usuarios)
+        session.add_all(peliculas)
+        session.commit()
+
+        favoritos = [
+            Favorito(id_usuario=usuarios[0].id, id_pelicula=peliculas[0].id),
+            Favorito(id_usuario=usuarios[1].id, id_pelicula=peliculas[1].id),
+            Favorito(id_usuario=usuarios[2].id, id_pelicula=peliculas[2].id),
+        ]
+
+        session.add_all(favoritos)
+        session.commit()
+
+        print("Datos de prueba inicializados correctamente")
