@@ -343,26 +343,27 @@ class TestFavoritos:
         assert response.status_code == 201
         assert response.json()["message"] == "Película marcada como favorita exitosamente"
     
-    # TODO: Test para listar favoritos de usuario
     def test_listar_favoritos_usuario(
-        self, 
-        client: TestClient, 
-        session: Session,
-        usuario_test: Usuario, 
+        self,
+        client: TestClient,
+        usuario_test: Usuario,
         pelicula_test: Pelicula
     ):
-        """Test para GET /api/usuarios/{id}/favoritos"""
-        # # Crear favorito
-        # favorito = Favorito(id_usuario=usuario_test.id, id_pelicula=pelicula_test.id)
-        # session.add(favorito)
-        # session.commit()
-        # 
-        # # Listar favoritos del usuario
-        # response = client.get(f"/api/usuarios/{usuario_test.id}/favoritos")
-        # assert response.status_code == 200
-        # data = response.json()
-        # assert len(data) > 0
-        pass
+        """Test para listar los favoritos de un usuario"""
+        response_crear = client.post(
+            f"/api/usuarios/{usuario_test.id}/favoritos/{pelicula_test.id}"
+        )
+        assert response_crear.status_code == 201
+
+        response = client.get(
+            f"/api/favoritos/usuario/{usuario_test.id}"
+        )
+
+        assert response.status_code == 200
+        assert isinstance(response.json(), list)
+        assert len(response.json()) == 1
+        assert response.json()[0]["id_usuario"] == usuario_test.id
+        assert response.json()[0]["id_pelicula"] == pelicula_test.id
 
 
 # =============================================================================
