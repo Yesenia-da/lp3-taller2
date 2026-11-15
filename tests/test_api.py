@@ -329,19 +329,19 @@ class TestFavoritos:
 
         assert response.status_code == 204
     
-    # TODO: Test para marcar favorito desde usuario
     def test_marcar_favorito_usuario(
-        self, 
-        client: TestClient, 
-        usuario_test: Usuario, 
+        self,
+        client: TestClient,
+        usuario_test: Usuario,
         pelicula_test: Pelicula
     ):
-        """Test para POST /api/usuarios/{id}/favoritos/{id_pelicula}"""
-        # response = client.post(
-        #     f"/api/usuarios/{usuario_test.id}/favoritos/{pelicula_test.id}"
-        # )
-        # assert response.status_code == 201
-        pass
+        """Test para marcar una película como favorita desde un usuario"""
+        response = client.post(
+            f"/api/usuarios/{usuario_test.id}/favoritos/{pelicula_test.id}"
+        )
+
+        assert response.status_code == 201
+        assert response.json()["message"] == "Película marcada como favorita exitosamente"
     
     # TODO: Test para listar favoritos de usuario
     def test_listar_favoritos_usuario(
