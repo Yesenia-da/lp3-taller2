@@ -304,26 +304,30 @@ class TestFavoritos:
         response2 = client.post("/api/favoritos/", json=favorito_data)
         assert response2.status_code == 400
         assert response2.json()["mensaje"] == "Este favorito ya existe"
-        
-    # TODO: Test para eliminar favorito
+
     def test_eliminar_favorito(
-        self, 
-        client: TestClient, 
-        session: Session,
-        usuario_test: Usuario, 
+        self,
+        client: TestClient,
+        usuario_test: Usuario,
         pelicula_test: Pelicula
     ):
-        """Test para DELETE /api/favoritos/{id}"""
-        # # Crear favorito
-        # favorito = Favorito(id_usuario=usuario_test.id, id_pelicula=pelicula_test.id)
-        # session.add(favorito)
-        # session.commit()
-        # session.refresh(favorito)
-        # 
-        # # Eliminar favorito
-        # response = client.delete(f"/api/favoritos/{favorito.id}")
-        # assert response.status_code == 204
-        pass
+        """Test para DELETE /api/favoritos/{favorito_id}"""
+        favorito_data = {
+            "id_usuario": usuario_test.id,
+            "id_pelicula": pelicula_test.id
+        }
+
+        crear_response = client.post(
+            "/api/favoritos/",
+            json=favorito_data
+        )
+        assert crear_response.status_code == 201
+
+        favorito_id = crear_response.json()["id"]
+
+        response = client.delete(f"/api/favoritos/{favorito_id}")
+
+        assert response.status_code == 204
     
     # TODO: Test para marcar favorito desde usuario
     def test_marcar_favorito_usuario(
