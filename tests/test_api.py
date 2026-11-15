@@ -116,19 +116,18 @@ class TestUsuarios:
         assert data["nombre"] == usuario_data["nombre"]
         assert data["correo"] == usuario_data["correo"]
         assert "id" in data
-        
+
     # TODO: Test para crear usuario con correo duplicado
     def test_crear_usuario_correo_duplicado(self, client: TestClient, usuario_test: Usuario):
         """Test para verificar que no se permiten correos duplicados"""
-        # usuario_data = {
-        #     "nombre": "Otro Usuario",
-        #     "correo": usuario_test.correo
-        # }
-        # response = client.post("/api/usuarios/", json=usuario_data)
-        # assert response.status_code == 400
-        # assert "correo" in response.json()["detail"].lower()
-        pass
-    
+        usuario_data = {
+            "nombre": "Otro Usuario",
+            "correo": usuario_test.correo
+        }
+        response = client.post("/api/usuarios/", json=usuario_data)
+        assert response.status_code == 400
+        assert "correo" in response.json()["mensaje"].lower()
+        
     # TODO: Test para obtener usuario por ID
     def test_obtener_usuario(self, client: TestClient, usuario_test: Usuario):
         """Test para GET /api/usuarios/{id}"""
