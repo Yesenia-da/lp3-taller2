@@ -267,25 +267,25 @@ class TestFavoritos:
         assert isinstance(response.json(), list)
 
     
-    # TODO: Test para crear favorito
     def test_crear_favorito(
-        self, 
-        client: TestClient, 
-        usuario_test: Usuario, 
+        self,
+        client: TestClient,
+        usuario_test: Usuario,
         pelicula_test: Pelicula
     ):
         """Test para POST /api/favoritos"""
-        # favorito_data = {
-        #     "id_usuario": usuario_test.id,
-        #     "id_pelicula": pelicula_test.id
-        # }
-        # response = client.post("/api/favoritos/", json=favorito_data)
-        # assert response.status_code == 201
-        # data = response.json()
-        # assert data["id_usuario"] == usuario_test.id
-        # assert data["id_pelicula"] == pelicula_test.id
-        pass
-    
+        favorito_data = {
+            "id_usuario": usuario_test.id,
+            "id_pelicula": pelicula_test.id
+        }
+
+        response = client.post("/api/favoritos/", json=favorito_data)
+
+        assert response.status_code == 201
+        data = response.json()
+        assert data["id_usuario"] == usuario_test.id
+        assert data["id_pelicula"] == pelicula_test.id
+
     # TODO: Test para crear favorito duplicado
     def test_crear_favorito_duplicado(
         self, 
