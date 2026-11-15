@@ -373,7 +373,6 @@ class TestFavoritos:
 class TestIntegracion:
     """Tests de integración que prueban flujos completos."""
     
-    # TODO: Test de flujo completo: crear usuario, película y marcar favorito
     def test_flujo_completo(self, client: TestClient):
         """Test que verifica el flujo completo de la aplicación"""
 
@@ -429,16 +428,19 @@ class TestIntegracion:
 class TestValidacion:
     """Tests para validaciones de datos."""
     
-    # TODO: Test para validar email inválido
     def test_email_invalido(self, client: TestClient):
         """Test para verificar validación de email"""
-        # usuario_data = {
-        #     "nombre": "Usuario Test",
-        #     "correo": "email-invalido"
-        # }
-        # response = client.post("/api/usuarios/", json=usuario_data)
-        # assert response.status_code == 422  # Unprocessable Entity
-        pass
+        usuario_data = {
+            "nombre": "Usuario Test",
+            "correo": "email-invalido"
+        }
+
+        response = client.post(
+            "/api/usuarios/",
+            json=usuario_data
+        )
+
+        assert response.status_code == 422
     
     # TODO: Test para validar año de película
     def test_año_pelicula_invalido(self, client: TestClient):
