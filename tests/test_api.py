@@ -259,13 +259,13 @@ class TestPeliculas:
 class TestFavoritos:
     """Tests para los endpoints de favoritos."""
     
-    # TODO: Test para listar favoritos
     def test_listar_favoritos(self, client: TestClient):
         """Test para GET /api/favoritos"""
-        # response = client.get("/api/favoritos/")
-        # assert response.status_code == 200
-        # assert isinstance(response.json(), list)
-        pass
+        response = client.get("/api/favoritos/")
+
+        assert response.status_code == 200
+        assert isinstance(response.json(), list)
+
     
     # TODO: Test para crear favorito
     def test_crear_favorito(
