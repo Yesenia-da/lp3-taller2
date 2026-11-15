@@ -147,13 +147,15 @@ class TestUsuarios:
     # TODO: Test para actualizar usuario
     def test_actualizar_usuario(self, client: TestClient, usuario_test: Usuario):
         """Test para PUT /api/usuarios/{id}"""
-        # update_data = {"nombre": "Nombre Actualizado"}
-        # response = client.put(f"/api/usuarios/{usuario_test.id}", json=update_data)
-        # assert response.status_code == 200
-        # data = response.json()
-        # assert data["nombre"] == update_data["nombre"]
-        pass
-    
+        update_data = {"nombre": "Nombre Actualizado"}
+        response = client.put(
+            f"/api/usuarios/{usuario_test.id}",
+            json=update_data
+        )
+        assert response.status_code == 200
+
+        data = response.json()
+        assert data["nombre"] == update_data["nombre"]  
     # TODO: Test para eliminar usuario
     def test_eliminar_usuario(self, client: TestClient, usuario_test: Usuario):
         """Test para DELETE /api/usuarios/{id}"""
