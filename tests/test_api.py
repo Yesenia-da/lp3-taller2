@@ -24,21 +24,18 @@ def session_fixture():
     Crea una sesión de base de datos en memoria para cada test.
     Se limpia automáticamente después de cada test.
     """
-    # TODO: Crear engine en memoria (SQLite)
-    # engine = create_engine(
-    #     "sqlite:///:memory:",
-    #     connect_args={"check_same_thread": False},
-    #     poolclass=StaticPool,
-    # )
-    
-    # TODO: Crear todas las tablas
-    # SQLModel.metadata.create_all(engine)
-    
-    # TODO: Crear sesión
-    # with Session(engine) as session:
-    #     yield session
-    pass
+    engine = create_engine(
+        "sqlite:///:memory:",
+        connect_args={"check_same_thread": False},
+        poolclass=StaticPool,
+    )
 
+    SQLModel.metadata.create_all(engine)
+
+    with Session(engine) as session:
+        yield session
+
+    engine.dispose()
 
 # TODO: Fixture para cliente de pruebas
 @pytest.fixture(name="client")
