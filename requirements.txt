@@ -16,3 +16,4 @@ python-dotenv
 pytest
 pytest-asyncio
 httpx
+psycopg2-binary

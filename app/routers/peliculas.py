@@ -202,7 +202,7 @@ def peliculas_populares(
 
     statement = (
         select(Pelicula, func.count(Favorito.id).label("total_favoritos"))
-        .join(Favorito, Favorito.pelicula_id == Pelicula.id, isouter=True)
+        .join(Favorito, Favorito.id_pelicula == Pelicula.id, isouter=True)
         .group_by(Pelicula.id)
         .order_by(func.count(Favorito.id).desc())
         .limit(limit)

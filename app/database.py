@@ -11,10 +11,21 @@ from app.config import settings
 # TODO: Crear el engine de la base de datos
 # El engine es la conexión principal a la base de datos
 # connect_args es específico para SQLite, remover para otras bases de datos
+database_url = settings.database_url
+
+if database_url.startswith("postgres://"):
+    database_url = database_url.replace("postgres://", "postgresql://", 1)
+
+connect_args = (
+    {"check_same_thread": False}
+    if database_url.startswith("sqlite")
+    else {}
+)
+
 engine = create_engine(
-    settings.database_url,
-    echo=settings.debug,  # Muestra las consultas SQL en consola si debug=True
-    connect_args={"check_same_thread": False}  # Necesario para SQLite
+    database_url,
+    echo=settings.debug,
+    connect_args=connect_args
 )
 
 
