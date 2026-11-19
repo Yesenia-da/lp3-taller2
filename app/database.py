@@ -16,6 +16,12 @@ database_url = settings.database_url
 if database_url.startswith("postgres://"):
     database_url = database_url.replace("postgres://", "postgresql://", 1)
 
+if database_url.startswith("postgresql://"):
+    database_url = database_url.replace(
+        "postgresql://",
+        "postgresql+psycopg2://",
+        1
+    )
 connect_args = (
     {"check_same_thread": False}
     if database_url.startswith("sqlite")
